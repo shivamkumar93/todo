@@ -48,24 +48,32 @@
             </thead>
             <tbody>
 
-                {% for todo in todos %}
+                {% for test in tests %}
                 <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <!-- <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                  dfhgug
                 </th> -->
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-lg">
                         {{forloop.counter}}
                     </td>
-                    <td class="px-6 py-4">
-                        {{todo.title}}
+                    <td class="px-6 py-4 text-lg">
+                        {{test.title}}
                     </td>
-                    <td class="px-6 py-4">
-                        {{todo.descriptions}}
+                    <td class="px-6 py-4 text-lg">
+                        {{test.description}}
                     </td>
-                    <td class="px-6 py-4 text-right gap-3 flex flex-1">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Completed</a>
-                        <a href="#" class="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</a>
+                    <td class="px-6 py-4 text-right gap-3 flex flex-1 items-center justify-center text-center">
+
+                        {% if test.completed %}
+                        <span class="text-green-700 font-semibold">✔ Completed</span>
+                        {% else %}
+                        <a href="{% url 'completed_todo' test.id %}" class="text-red-700 font-semibold">❌ Not Completed</a>
+                   
+                        {% endif %}
+
+
+                        <a href="{% url 'delete' test.id %}" class="font-medium text-red-600 text-lg dark:text-blue-500  hover:underline">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
